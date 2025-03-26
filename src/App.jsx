@@ -14,10 +14,10 @@ export default function App() {
         scope: "read:current_user update:current_user_metadata"
       }}
     >
-      <BrowserRouter basename={process.env.PUBLIC_URL || ''}>
+      <BrowserRouter basename={process.env.NODE_ENV === 'production' ? '/chatbox' : '/'}>
         <Routes>
-          <Route path="/" element={<ChatPage />} />
-          <Route path="/profile/:username" element={<ProfilePage />} />
+            <Route path="/" element={<ChatPage />} />
+            <Route path="/profile/:username" element={<ProfilePage />} />
         </Routes>
       </BrowserRouter>
     </Auth0Provider>
