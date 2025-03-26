@@ -1,0 +1,60 @@
+.auth-button {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .auth-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .login-button {
+    background: var(--primary-color);
+    color: white;
+  }
+  
+  .login-button:hover {
+    background: #43A047;
+  }
+  
+  .logout-button {
+    background: var(--danger-color);
+    color: white;
+  }
+  
+  .logout-button:hover {
+    background: #E53935;
+  }
+  
+  .profile-button {
+    padding: 0;
+    border-radius: 50%;
+    background: transparent;
+  }
+  
+  .profile-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--primary-color);
+    object-fit: cover;
+    transition: transform 0.2s;
+  }
+  
+  .profile-button:hover .profile-avatar {
+    transform: scale(1.1);
+  }
+  
+  .profile-button-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
