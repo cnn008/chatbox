@@ -4,29 +4,18 @@ import ChatPage from './pages/ChatPage';
 import ProfilePage from './pages/ProfilePage';
 
 export default function App() {
-  // Get environment variables
-  const domain = process.env.REACT_APP_AUTH0_DOMAIN;
-  const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
-  const audience = process.env.REACT_APP_AUTH0_AUDIENCE;
-
-  // Dynamic redirect URI handling
-  const getRedirectUri = () => {
-    if (process.env.NODE_ENV === 'production') {
-      return `${process.env.PUBLIC_URL}/`;
-    }
-    // For local development with callback path support
-    return window.location.hostname === 'localhost' 
-      ? `${window.location.origin}/callback`
-      : window.location.origin;
-  };
+  // Auth0 config (uses process.env.NODE_ENV automatically)
+  const redirectUri = process.env.NODE_ENV === 'development' 
+    ? `${window.location.origin}/callback` 
+    : `${process.env.PUBLIC_URL}/`;
 
   return (
     <Auth0Provider
-      domain={domain}
-      clientId={clientId}
+      domain={process.env.REACT_APP_AUTH0_DOMAIN}
+      clientId={process.env.REACT_APP_AUTH0_CLIENT_ID}
       authorizationParams={{
-        redirect_uri: getRedirectUri(),
-        audience: audience,
+        redirect_uri: redirectUri,
+        audience: process.env.REACT_APP_AUTH0_AUDIENCE,
         scope: "read:current_user update:current_user_metadata"
       }}
     >
