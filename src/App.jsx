@@ -4,20 +4,23 @@ import ChatPage from './pages/ChatPage'
 import ProfilePage from './pages/ProfilePage'
 
 export default function App() {
+  const isProduction = process.env.NODE_ENV === 'production'
+  const productionUrl = 'https://cnn008.github.io/chatbox'
+  
   return (
     <Auth0Provider
       domain={process.env.REACT_APP_AUTH0_DOMAIN}
       clientId={process.env.REACT_APP_AUTH0_CLIENT_ID}
       authorizationParams={{
-        redirect_uri: window.location.origin,
+        redirect_uri: isProduction ? productionUrl : window.location.origin,
         audience: process.env.REACT_APP_AUTH0_AUDIENCE,
         scope: "read:current_user update:current_user_metadata"
       }}
     >
-      <BrowserRouter basename={process.env.NODE_ENV === 'production' ? '/chatbox' : '/'}>
+      <BrowserRouter basename={isProduction ? '/chatbox' : '/'}>
         <Routes>
-            <Route path="/" element={<ChatPage />} />
-            <Route path="/profile/:username" element={<ProfilePage />} />
+          <Route path="/" element={<ChatPage />} />
+          <Route path="/profile/:username" element={<ProfilePage />} />
         </Routes>
       </BrowserRouter>
     </Auth0Provider>
